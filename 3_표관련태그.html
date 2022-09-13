@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>표 관련 태그</title>
+
+        <!-- CSS 영역: style 태그로 지정 -->
+        <style>
+            /* CSS 영역의 주석: HTML의 주석이 먹히지 않음 */
+
+            /* 이 페이지의 모든 thead 태그에 적용 */
+            thead {
+                background-color: magenta; /* 배경색 */
+                color: white; /* 글자색 */
+            }
+
+            /* 이 페이지의 모든 tbody 태그에 적용 */
+            /*
+            tbody {
+                background-color: lightgrey;
+            }
+            */
+
+            /* id 속성값이 tt인 요소만 골라서 스타일 주기 => '#아이디값' */
+            #tt {
+                background-color: lightgrey;
+            }
+
+            /* 이 페이지의 모든 tfoot 태그에 적용 */
+            tfoot {
+                background-color: darkgreen;
+                color: yellow;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <!-- 
+            표: 문서에서 다량의 데이터를 정리해서 표현하고자 할 때 사용
+                행과 열로 이루어져 있음
+
+            표를 구성하는 태그로는 <table>, <tr>, <th>, <td>
+            
+            <table></table>: 기본적으로 표를 생성해 주는 태그
+                             테이블태그 내부에 행과 열을 표현함
+
+            <tr></tr>: 표의 한 행을 나타내는 태그 (가로줄 한 줄)
+
+            <th></th>: 표의 한 칸을 나타내는 태그(주로 컬럼명을 작성할 때 씀) => 제목 칸을 나타냄
+            <td></td>: 표의 한 칸을 나타내는 태그(주로 컬럼값을 작성할 때 씀) => 일반 칸을 나타냄
+        -->
+
+        <h1>기본적인 표 만들기 (4행 3열)</h1>
+
+        <table border="1">  <!-- border 속성: 표의 테두리 두께 -->
+            <tr>
+                <!-- width 속성: 칸의 가로 넓이, hegiht 속성: 칸의 세로 길이 -->
+                <th width="130" height="30">브라우저명</th>
+                <th width="80">제조사</th>
+                <th width="200">홈페이지</th>
+            </tr>
+            <tr>
+                <td>Internet Explorer</td>
+                <td>MS</td>
+                <td>http://www.microsoft.com</td>
+            </tr>
+            <tr>
+                <td>chrome</td>
+                <td>google</td>
+                <td>http://www.google.com</td>
+            </tr>
+            <tr>
+                <td>FireFox</td>
+                <td>Mozila</td>
+                <td>http://www.mozila.org</td>
+            </tr>
+
+        </table>
+
+        <hr>
+
+        <h1>표의 행과 열을 합치는 속성</h1>
+        <!--
+            칸(th, td) 태그와 속성을 이용해서 행 또는 열을 합칠 수 있음
+
+            colspan="2": (가로로) 2개의 열을 합치겠다.
+            rowspan="2": (세로로) 2개의 행을 합치겠다.
+        -->
+
+        <table border="1"> <!-- 4행 4열 -->
+            <tr>
+                <td width="130" height="130" colspan="2" rowspan="2">사진</td>
+                <!-- 사진이 들어갈 1행 2열 삭제
+                <td width="100"></td>
+                -->
+                <td width="80">이름</td>
+                <td width="200"></td>
+            </tr>
+            <tr>
+               <!-- 사진이 들어갈 2행 1, 2열 삭제
+                <td width="100" height="100"></td>
+               <td width="100"></td>
+               -->
+                <td>연락처</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td width=70" height="50" >주소</td>
+                <td width="100" colspan="3"></td>
+                <!-- 합계만 칸 수가 맞으면 됨! 즉, 밑의 빈 칸 2칸에는 모두 주소 내용이 들어가므로 따로 필요 없어짐
+                <td width="100"></td>
+                <td width="100"></td>
+                -->
+            </tr>
+            <tr>
+                <td height="300">자기소개</td>
+                <td colspan="3"></td>
+                
+            </tr>
+
+        </table>
+
+        <hr>
+
+        <h1>테이블 내에 구조 나누기</h1>
+
+        <table border="1">
+
+           <!-- thead: 이 테이블의 머리부를 의미하게 됨, 테이블당 1개만 존재 -->
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            
+            <!-- tbody: 이 테이블의 몸통부를 나타냄,
+                        테이블에 여러 개 존재 가능
+                        기본적으로 테이블에 영역을 지정 안 하면 tbody로 잡힘 -->
+            <tbody id="tt">
+                <tr>
+                    <td>홍길동</td>
+                    <td>23</td>
+                    <td>서울</td>
+                </tr>
+                <tr>
+                    <td>김갑생</td>
+                    <td>30</td>
+                    <td>부산</td>
+                </tr>
+                <tr>
+                    <td>박말똥</td>
+                    <td>25</td>
+                    <td>광주</td>
+                </tr>
+            </tbody>
+            
+            <!-- tfoot: 이 테이블의 다리 부분을 나타냄,
+                        반드시 thead 태그 뒤에 있어야 하며 테이블당 1개만 존재 가능-->
+            <tfoot>
+                <tr>
+                    <th colspan="2">총 인원</th>
+                    <td>3명</td>
+                </tr>
+           </tfoot>
+        </table>
+
+        <hr>
+
+        <h1>테이블에 제목 달기</h1>
+
+        <table border="1">
+
+            <!-- caption 태그: 테이블의 제목 추가 (기본 위치는 테이블 상단 중앙) -->
+            <caption><b>자동차 종류</b></caption>
+
+
+            <tr>
+                <th>자동차</th>
+                <th>제조사</th>
+            </tr>
+
+            <tr>
+                <td>k3</td>
+                <td>기아자동차</td>
+            </tr>
+
+            <tr>
+                <td>아반떼</td>
+                <td>현대자동차</td>
+            </tr>
+
+            <tr>
+                <td>티볼리</td>
+                <td>쌍용자동차</td>
+            </tr>
+        </table>
+
+        <!-- html 응용문제 3 -->
+        <h3>자유게시판</h3>
+        <table border="1">
+            <tr>
+                <th width="60">글번호</th>
+                <th width="300">제목</th>
+                <th width="70">작성자</th>
+                <th width="90">작성일</th>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>안녕하세요</td>
+                <td>user03</td>
+                <td>2020-12-22</td>
+           </tr>
+           <tr>
+            <td>2</td>
+            <td>ㅋㅋㅋ재밌네요</td>
+            <td>user01</td>
+            <td>2020-10-02</td>
+           </tr>
+           <tr>
+            <td>1</td>
+            <td>자유게시판 서비스를 시작합니다.</td>
+            <td>admin</td>
+            <td>2020-03-30</td>
+           </tr>
+
+        </table>
+
+    </body>
+
+</html>
+
+<!-- 스크롤 하기 편하라고 그냥 씀 -->
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

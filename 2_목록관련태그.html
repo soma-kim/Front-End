@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+        <head>
+            <title>목록 관련 태그</title>
+        </head>
+        <body>
+            <!-- li: list의 약자 -->
+            <li>목록1</li>  <!-- list는 한 줄 다 잡아먹으므로 자동 줄바꿈 됨 -->
+            <li>목록2</li>
+
+            <h1>ul: 순서가 없는 목록을 나타내는 태그</h1>
+            <ul> <!-- 순서 없이 동그라미로 표시되며 들여쓰기 됨 -->
+                <li>html</li>
+                    <ul> <!-- 보통은 ul의 자식으로 li가 오지만 그 li의 자식으로 또 ul가 올 수 있음
+                              즉, 목록 안에 또 목록이 올 수 있음 (제한 없음)-->
+                        <li>글자 관련</li>
+                        <li>목록 관련</li>
+                    </ul>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>jQurey</li>
+            </ul>
+
+            <!-- 불릿(bullet) 기호: 채워진 원, 빈 원, 네모, ... 모양 변경 가능 => CSS 시간에 할 것 -->
+            <br>
+
+            <hr>
+
+            <h1>ol: 순서가 있는 목록을 나타내는 태그</h1>
+            <ol>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>jQuery</li>
+            </ol>
+            <!-- 순서 있는 목록 태그는 기본적으로 1부터 시작하는 숫자값 -->
+
+            <br>
+
+            <!-- ol 태그의 type 속성을 이용해서 변경 가능 (속성값: 1(기본값), A, a, i, I) -->
+            <ol type="A"> <!-- A, B, C, D -->
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>jQuery</li>
+            </ol>
+
+            <br>
+
+            <!-- start 속성을 이용해서 시작값 변경 가능 -->
+            <ol start="5" type="A">  <!-- E, F, G, H -->
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>jQuery</li>
+            </ol>
+
+            <br>
+
+            <!-- reversed 속성을 이용해서 역순으로 표기 (속성값을 제시하지 않음)-->
+            <ol reversed> <!-- 4, 3, 2, 1 -->
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>jQuery</li>
+            </ol>
+
+            <br>
+
+            <hr>
+
+            <h1>d1: 설명과 관련된 목록을 나타내는 태그</h1>
+            <dl>
+                <dt>이곳은 제목을 작성하는 곳</dt> <!-- 목록의 제목 -->
+                <dd>여기에 해당 설명을 작성하는 곳</dd> <!-- 목록의 내용 -->
+                <dd>여러 줄을 작성할 수 있다.</dd>
+
+                <dt>또 다른 제목 작성 가능</dt>
+                <dd>설명도 마찬가지</dd>
+            </dl>
+
+            <br>
+
+            <hr>
+
+            <!-- HTML 응용문제 2 -->
+            <h3>자바(Java) 학습내용</h3>
+            <h4>담당 강사: 김가현</h4>
+            이메일: ghkim1121@iei.or.kr
+            
+            <hr>
+            <ul>
+                <li>프로그래밍 언어</li>
+                    <ul>
+                        <li> <s>Java</s></li>
+                    </ul>
+                <li>데이터베이스</li>
+                <ul>
+                    <li> <s>Oracle</s></li>
+                </ul>
+                <li>Frontend</li>
+                    <ol>
+                        <li><mark>HTML5</mark></li>
+                        <li>CSS3</li>
+                        <li>JavaScript</li>
+                        <li>jQuery</li>
+                    </ol>
+                <li>서버 개발 기술</li>
+                    <ol type="i">
+                        <li><s>JDBC</s></li>
+                        <li>Servlet</li>
+                        <li>JSP</li>
+                        <li>AJAX</li>
+                    </ol>
+                <li>프레임워크</li>
+                    <ol type="a">
+                        <li>MyBatis</li>
+                        <li><b>Spring</b></li>
+                    </ol>
+            </ul>
+
+
+
+
+
+
+        </body> 
+
+        </body>
+</html>
