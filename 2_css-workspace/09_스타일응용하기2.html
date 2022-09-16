@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스타일 응용하기 2</title>
+    <style>
+        body {
+
+            color :rgb(63, 30, 11);
+
+        }
+
+        .naverTitle {
+            font-size : 70px;
+            font-weight : 650;
+            color : green;
+        }
+
+        #naverSearch {
+            border-width : 3px;
+            border-color : green;
+            border-style : solid;
+            width : 400px;
+            height : 30px;
+        }
+
+        #naverButton { 
+            background-color : green;
+            border-color : green;
+            border-style : solid;
+            border-width : 9px;
+            color : white;
+
+        }
+
+        #button:hover {
+            cursor : pointer;
+        }
+
+        #kakao {
+            background-color: yellow;
+        }
+
+        .kakaoTitle {
+            color : rgb(63, 30, 11);
+            font-size : 50px;
+            font-weight : bolder;
+            text-align : center;
+        }
+
+        #kakaoLogin {
+            text-align : center;
+            margin : auto;
+        }
+
+        #kakaoLoginButton {
+            background-color: rgb(63, 30, 11);
+            border-style : solid;
+            border-color : rgb(63, 30, 11);
+            border-width : 10px;
+            border-radius : 10px;
+            padding : 15px 2px;
+            color : white;
+        }
+
+        .kakoidpwd {
+            border-style : none;
+            border-radius : 10px;
+            padding-top : 10px;
+            padding-bottom : 10px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="naverTitle">NAVER</div>
+
+    <table>
+        <tr>
+            <td><input type="text" id="naverSearch"></td>
+            <td><input type="submit" value="검색" id="naverButton"></td>
+        </tr>
+    </table>
+
+    <br> <br> <br> <br> <br><br> <br> <br> <br> <br>
+
+    <form id="kakao">
+        <br>
+        <div class="kakaoTitle">KAKAO</div>
+        <br>
+
+        <table id="kakaoLogin">
+            <tr>
+                <td><input type="text" placeholder="아이디를 입력하세요" class="kakoidpwd"></td>
+                <td rowspan="2"><input type="submit" value="로그인" id="kakaoLoginButton"></td>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="비밀번호를 입력하세요" class="kakoidpwd"></td>
+            </tr>
+            <tr>
+                <td colspan="2">계정 찾기 | 비밀번호 재설정</td>
+            </tr>
+
+        </table>
+        <br> <br> <br>
+    </form>
+    
+</body>
+</html>

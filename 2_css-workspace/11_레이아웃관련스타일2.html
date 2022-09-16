@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레이아웃 관련 스타일 2</title>
+    <style>
+        .outer {
+            /* border : 1px solid blue; 부모 요소의 가이드 라인 잠깐 지우면 더 깔끔하게 과녁 모양 나옴 */
+            position : relative;
+            /* 기준이 되는 요소(outer)에 기준점을 부여함 */
+            /* 만약 기준점을 바로 위의 부모 요소에 지정하지 않는다면
+               기준점이 자동으로 body 태그에 잡혀 버림 */
+        }
+
+        .positioning {
+            border : 1px solid black;
+        }
+
+        #first {
+            width : 300px;
+            height : 300px;
+            background-color: yellow;
+        }
+
+        #second {
+            width : 200px;
+            height : 200px;
+            background-color: yellowgreen;
+            position : absolute;
+            /* 움직이고자 하는 요소 내에 position : absolute를  지정하여 절대적인 위치로 움직일 수 있게 함*/
+            top : 50px;
+            left : 50px;
+            /* 부모 요소 (기준점 position : relative) 로부터 각각 위, 왼쪽으로부터 50px인 곳으로 옮겨 버리겠다 */
+        }
+
+        #third {
+            width : 100px;
+            height : 100px;
+            background-color: red;
+            position : absolute;
+            top : 100px;
+            left : 100px;
+        }
+
+        .fixed-area {
+            width : 100px;
+            height : 100px;
+            background-color: red;
+            /* position : fixed; 다음 실습을 위해 거슬려서 주석 처리*/
+        }
+
+        .z-test {
+            width : 150px;
+            height : 150px;
+            border : 1px solid black;
+            position : absolute;
+        }
+
+        #z1 {
+            background-color: yellow;
+            top : 100px;
+            left : 100px;
+            z-index : 30;
+        }
+
+        #z2 {
+            background-color: green;
+            top : 50px;
+            left : 50px;
+            z-index : 10;
+        }
+
+        #z3 {
+            background-color: red;
+            z-index : 100;
+
+            /*
+            z-index의 숫자가 "높을수록" 다른 요소들보다 더 "위쪽"에 쌓여 있겠다라는 뜻
+            해당 속성의 값은 몇이 되는지 상관없이 단순히 상대적인 값의 크기만으로 위, 아래가 결정됨
+             */
+        }
+
+        .vis-test {
+            width : 100px;
+            height : 100px;
+        }
+
+        #vis {
+            /* visibility : hidden; */
+            /* 요소가 안 보이게끔 숨기지만 공간은 차지함! 
+               그래서 아래의 방법을 더 많이 씀 */
+
+               display : none;
+               /* 요소가 안 보이게끔 숨기면서 공간도 차지하지 않음 */
+
+               /* 숨긴 것을 다시 보여 주고 싶다면? 기존 값을 다시 주면 됨 */
+               display : block;
+        }
+
+        .float-test {
+            border : 1px solid black;
+            width : 70px;
+            height : 30px;
+            float : left;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>배치 관련 스타일</h1>
+
+    <h3>position: 절대 위치와 상대 위치를 나타냄</h3>
+
+
+    <!-- div.outer>div.positioning*3 + Enter -->
+    <div class="outer">
+        <div class="positioning" id="first">첫 번째 자식</div>
+        <div id="vis" class="positioning" id="second">두 번째 자식</div>
+        <div class="positioning" id="third">세 번째 자식</div>
+    </div>
+
+    <hr>
+
+    <h3>고정 위치</h3>
+
+    <!-- background-attachment : fixed; 와 같은 이치 -->
+    <div class="positioning fixed-area"></div>
+    
+    <br><br><br><br><br><br><br><br><br><br>
+    <!-- 현재 과녁의 위치를 옮겨 줘서
+        컴퓨터가 옮긴 사각형이 body 태그에 딱 붙어 있지 않은 걸로 인식(?)
+        따라서 공백을 준 뒤 선을 그어 줘야 함~
+     -->
+    <hr>
+
+    <h3>z-index</h3>
+
+    <p>
+        페이지 안의 요소들을 순서대로 위로 쌓는 속성
+    </p>
+
+    <!-- div.outer>div#z$.z-test{요소$}*3 + Enter -->
+    <div class="outer">
+        <div id="z1" class="z-test">요소1</div>
+        <div id="z2" class="z-test">요소2</div>
+        <div id="z3" class="z-test">요소3</div>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <!-- 현재 과녁의 위치를 옮겨 줘서
+        컴퓨터가 옮긴 사각형이 body 태그에 딱 붙어 있지 않은 걸로 인식(?)
+        따라서 공백을 준 뒤 선을 그어 줘야 함~
+     -->
+    <hr>
+
+    <h3>visibility</h3>
+
+    <p>
+        페이지에 특정 요소를 보이거나 보이지 않게 숨겨 주는 속성
+    </p>
+
+    <!-- div.vis-text*3 + Enter -->
+    <div class="vis-test" style="background-color : red;"></div>
+    <div id="vis" class="vis-test" style="background-color : green;"></div>
+    <div class="vis-test" style="background-color : yellow;"></div>
+    
+    <hr>
+
+    <h3>float</h3>
+
+    <p>
+        페이지 내의 요소들을 화면으로부터 띄워서 왼쪽 또는 오른쪽으로 배치하는 속성
+    </p>
+
+    <!-- div.float-test{요소$}*5 + Enter -->
+    <div class="float-test">요소1</div>
+    <div class="float-test">요소2</div>
+    <div class="float-test">요소3</div>
+    <div class="float-test">요소4</div>
+    <div class="float-test">요소5</div>
+
+    <!--<br clear="both">  float 속성을 해제할 때 사용 -->
+    <hr>
+    
+</body>
+</html>
+
+
+<br><br><br><br><br>
