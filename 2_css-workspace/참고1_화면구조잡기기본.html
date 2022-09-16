@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화면 구조 잡기 기본</title>
+    <style>
+        div {
+            border : 1px solid red;
+            box-sizing : border-box;
+            /* 지금부터 지정하는 width, hegiht 속성은 border 영역까지 포함하는 길이임 */
+        }
+
+        /* 전체를 감싸는 wrap */
+        .wrap {
+            width : 1000px;
+            height : 800px;
+            margin : auto; /* 좌우로 자동으로 정가운데로 정렬시켜 줌 */
+        }
+
+        /* 크게 세 가지 영역 */
+        /* #header, #content, #footer { */
+        .wrap>div { /* class 속성이 wrap 요소들의 자손 중에 div 태그들만 선택하겠다 */
+            width : 100%
+        }
+
+        #header, #footer {
+            height : 20%;
+        }
+
+        #content {
+            height : 60%;
+        }
+
+        /* content의 자식들 */
+        /* #content_1, #content_2 { 로 해도 되고 밑처럼 해도 됨 */
+        #content>div {
+            height : 100%;
+            float : left;
+            /* 블럭 요소인 div들을 옆으로 배치되게끔 해 줌 */
+        }
+
+        /* 왼쪽 화면을 담당하는 content_1 */
+        #content_1 {
+            width : 20%;
+        }
+
+        #contetn_2 {
+            width : 80%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="wrap">
+        <div id="header"></div>
+        <div id="content">
+            <div id="content_1"></div>
+            <div id="content_2"></div>
+        </div>
+        <div id="footer"></div>
+    </div>
+    
+</body>
+</html>
