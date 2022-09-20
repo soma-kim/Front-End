@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화면 통합</title>
+    <style>
+        /* ----- 화면 구조 잡는 데 필요한 스타일들 ----- */
+        div {
+             border : 1px solid black;
+            box-sizing : border-box; /* boder까지 포함한 크기로 지정하겠다 */
+        }
+
+        .wrap {
+            width : 1000px;
+            height : 800px;
+            margin : auto;
+        }
+
+        /* header, navigator, content, footer 의 공통 속성 : 가로 길이 100% */
+        .wrap>div { width : 100%; }
+
+        /* header, navigator, content, footer 의 개별 속성 : 세로 길이 각각 */
+        #header, #footer { height : 20%; }
+        #navigator { height : 5%; }
+        #content { height : 55%; }
+
+        /* header의 자식들, content의 자식들의 공통 속성 : 세로 길이 100%, 가로로 배치됨 */
+        #header>div, #content>div {
+            height : 100%;
+            float : left;
+        }
+
+        /* header의 자식들, content의 자식들의 개별속성 : 가로 길이 각각 */
+        #header_1 {
+            width : 20%;
+        }
+        #header_2 { width : 65%; }
+        #header_3 { width : 15%; }
+
+        #content_1{ width : 15%; }
+        #content_2{ width : 60%; }
+        #content_3{ width : 25%; }
+
+         /* --------------------------------------------- */
+
+
+         /* ----- 푸터바 만드는 데 필요한 스타일들 ----- */
+
+        /* footer의 자식들의 공통적인 속성 : 가로 길이 100% */
+        #footer>div { width : 100%; }
+
+        /* footer의 자식들의 개별적인 속성 */
+        #footer_1 { height : 20%; }
+        #footer_2 { height : 80%; }
+
+        /* footer_2의 자식들의 공통적인 속성 */
+        #footer_2>p {
+            width : 100%;
+            /* border : 1px solid blue; 다 완성했으니 가이드 라인 지워 보기 */ 
+            margin : 0px; /* p 태그에는 기본적으로 위, 아래 마진이 있으므로 없애 줌 */
+            box-sizing: border-box; /* p 태그도 마찬가지로 테두리를 포함한 width, height 속성을 적용시킬 것 */
+            font-size : 12px; /* 글자 크기 줄이기 */
+        }
+
+        
+        /* footer_2의 자식들의 개별적인 속성 : 세로 길이 */        
+        #p1 { 
+            height : 80%;
+            padding : 5px; /* padding으로 상하, 좌우의 여백을 넣어 주기 */
+        }
+        #p2 {
+            height : 20%;
+            text-align : center;
+        }
+
+        #footer_1>a {
+            text-decoration: none;
+            color: black;
+            font-weight : 600;
+            margin : 15px;
+            vertical-align: middle; /* 수직 구조에서 가운데로 오게끔 해 주는 속성 */
+        }
+
+         /* --------------------------------------------- */
+
+
+         /* ----- 로그인 폼과 관련된 스타일들 ----- */
+
+        /* form 태그에 border-box 추가*/
+        form { box-sizing : border-box; }
+
+        /* 1. 전체 내용을 감싸는 div에 대한 스타일 */
+        #login_form {
+            width : 100%;
+            height : 30%;
+            /* border : 1px solid blue; 가이드 라인 지워 주기 */
+        }
+
+        /* 2. login_form의 모든 자식 요소들에 대한 공통적인 속성 */
+        #login_form>* {
+            width : 100%;
+            /* border : 1px solid green; */
+        }
+
+        /* 2_1. login_form의 첫 번째 자식인 form 태그에 대한 개별 속성 : 세로 길이 */
+        #login_form_input { height : 80%; }
+        
+        /* 2_2. login_form 의 두 번째 자식인 div 태그에 대한 개별 속성 : 세로 길이 */
+        #login_form_etc {
+            height : 20%;
+            text-align: center; /* a 태그들에 대해 가운데 정렬을 하려면 부모 요소에 해 줘야 함 */
+        }
+
+        /* login_form_input 의 모든 자식들의 공통적인 속성 : 세로 길이, 가로로 배치됨 */
+        #login_form_input>* {
+            height : 100%;
+            float : left;
+            /* border : 1px solid purple; 가이드 라인 지워 주기 */
+        }
+
+        /* 3_1. login_form_input 의 첫 번째 자식인 div 태그에 대한 개별 속성: 가로 길이 */
+        #login_input_id_pwd { width : 65%; }
+
+        /* 3_2. login_input_btnd 에 대한 개별 속성 : 가로 길이 */
+        #login_input_btn { width : 35%; }
+
+        /* 2_2의 자식 태그들인 a 태그들에 대한 속성들 */
+        #login_form_etc>a {
+            text-decoration: none;
+            color : black;
+            margin : 10px;
+            font-size : 12px;
+            vertical-align: middle;
+        }
+
+        /* 3_1의 모든 자식 요소들인 input 태그들에 대해서 스타일 지정 */
+        #login_input_id_pwd>input {
+            width : 100%;
+            height : 50%;
+            box-sizing: border-box;
+        }
+
+        /* 3_2의 모든 자식 요소들인 input 태그들에 대해서 스타일 지정 */
+        #login_input_btn>input {
+            width : 100%;
+            height : 100%;
+            /* box-sizing: border-box; 안 넣어도 기본적으로 테두리 안에 들어가 있으므로 굳이 안 해 줘도 무방! */
+        }
+
+         /* --------------------------------------------- */
+
+
+         /* ----- 검색창과 관련된 스타일들 ----- */
+
+         /* 합칠 때 가지고 갈 속성: 따로 작성하기 */
+        #header_2 { position : relative; }
+
+        /* 전체 검색창을 감싸는 div */
+        #search_form {
+            width : 80%;
+            height : 20%;
+            /* border : 1px solid blue; */
+            margin : auto;
+            position : absolute;
+            right : 0px;
+            left : 0px;
+            bottom : 0px;
+            top : 0px;
+        }
+
+        /* 전체 검색창 내부의 상세 div에 대한 스타일 */
+        #search_form>div {
+            height : 100%;
+            float : left;
+            /* border : 1px solid green; */
+        }
+
+        #search_text { width : 80%; }
+        #search_btn { width : 20%; }
+
+        /* form 태그의 모든 후손 input 요소들만 골라내기 */
+        #search_form input {
+            width : 100%;
+            height : 100%;
+        }
+
+         /* --------------------------------------------- */
+
+
+         /* ----- Navigator와 관련된 스타일들 ----- */
+
+         /* 메인 메뉴를 담당하는 navi 에 대한 스타일 */
+        #navi {
+            /* border : 1px solid blue; */
+            list-style-type : none; 
+            margin : 0px; /* ul 요소도 기본적으로 위, 아래에 margin이 존재 */
+            padding : 0px; /* ul 요소도 기본적으로 또한 padding을 가지고 있음 */
+            height : 100%;
+        }
+
+        /* 메인 메뉴 항목을 담당하는 li 요소들에 대한 스타일 */
+        #navi>li {
+            /* border: 1px solid blue; */
+            float : left;
+            width : 15%;
+            height : 100%;
+            text-align: center;
+        }
+
+        /* 메뉴바에 있는 모든 a 태그들을 일괄 선택하여 스타일 부여  */
+        #navi a {
+            /* border : 1px solid green; */
+            text-decoration: none;
+            color : lightcoral;
+            font-size: 13px;
+            font-weight: 900;
+            width : 100%;
+            height : 100%;
+            display : block; /* width, height 속성이 적용되지 않으므로 블럭 요소화 해 줘야 함 */
+            /* vertical-align: middle; vertical-align 속성은 블럭요소에서 적용되지 않음! 인라인 요소에서만 가능 */
+            line-height : 35px; /* 장평(글자의 '가로/세로'의 비율) 조절 속성 */
+
+        /* 
+            <화면 통합 시 이슈 발생!>
+
+            알게 모르게 메인 메뉴와 서브 메뉴 사이에 화면 연결이 살짝 끊김 (확대해서 보면 마우스 모양 바뀜)
+            => transform 속성(애니메이션 효과를 줄 수 있는 속성) 추가해 주기
+                
+                transform : scale(1);
+                => "1배 확대하겠다"라는 함수
+        */
+
+            transform : scale(1);
+        }
+
+        /* 메뉴에 마우스가 올라갔을 때 추가적인 효과 */
+        #navi a:hover {
+            color : crimson;
+            font-size: 15px;
+        }
+
+        /* 서브메뉴를 담당하는 ul 태그에 대한 스타일 */
+        #navi>li>ul {
+            list-style-type: none;
+            padding : 0px;
+            /* 평소에는 안 보여 주다가 마우스가 올라가는 순간 보여 주게끔 */
+            /* visibility: hidden; 숨기지만 영역 차지를 하기 때문에 거의 쓰지 않음! */
+            display : none; /* 숨기고 영역 차지도 안 함 */
+        }
+
+        /* 메인메뉴에 마우스가 올라가는 순간 서브메뉴가 펼쳐져서 보이게끔 */
+        #navi>li>a:hover+ul { /* a에 마우스 올라갈 때 그 동생인 애들을 */
+            display : block; /* (hidden에서 다시) 살려 줄 거야~*/
+        }
+
+        /* 서브 메뉴에도 마우스가 올라갈 때 펼쳐진 게 유지될 수 있게끔 */
+        #navi>li>ul:hover {
+            display : block;
+        }
+
+        /* 서브 메뉴 글씨만 좀 더 작게 보이게끔 */
+        #navi>li>ul a { font-size: 10px; }
+        #navi>li>ul a:hover { font-size: 13px; }
+
+         /* --------------------------------------------- */
+
+        /* ----- logo 관련 스타일 ----- */
+        /* 로고 이미지 이동을 위한 기준점 잡기 (부모 요소에) */
+        #header_1 { position : relative; }
+
+        /* 자식 요소인 로고 이미지 움직이기 */
+        #logo {
+            margin : auto;
+            position : absolute;
+            right : 0px;
+            left : 0px;
+            bottom : 0px;
+            top : 0px;
+        }
+
+         /* --------------------------------------------- */
+
+
+
+
+    </style>
+
+
+</head>
+<body>
+
+    <div class="wrap">
+        <div id="header">
+            <div id="header_1">
+                <a href="">
+                    <img src="resources/image/kh_logo.jpg" id="logo"></a>
+            </div>
+            <div id="header_2">
+                <form id="search_form" action="test.do" method="get">
+                    <div id="search_text">
+                        <input type="search" name="keyword">
+                    </div>
+                    <div id="search_btn">
+                        <input type="submit" value="검색">
+                    </div>
+                </form>
+            </div>
+            <div id="header_3"></div>
+        </div>
+        <div id="navigator">
+            <ul id="navi">
+                <!-- (li>a)*5 + Enter -->
+                <li><a href="">Java</a></li>
+                <li><a href="">Oracle</a></li>
+                <li><a href="">Front-end</a>
+                    <ul>
+                        <li><a href="">HTML</a></li>
+                        <li><a href="">CSS</a></li>
+                        <li><a href="">JavaScript</a></li>
+                        <li><a href="">jQuery</a></li>
+                    </ul>
+                </li>
+                <li><a href="">Server</a>
+                    <ul>
+                        <li><a href="">JDBC</a></li>
+                        <li><a href="">Servlet</a></li>
+                        <li><a href="">JSP</a></li>
+                        <li><a href="">Ajax</a></li>
+                    </ul>
+                </li>
+                <li><a href="">Framework</a>
+                    <ul>
+                        <li><a href="">MyBatis</a></li>
+                        <li><a href="">Spring</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="content">
+            <div id="content_1"></div>
+            <div id="content_2"></div>
+            <div id="content_3">
+                <!-- 1. 전체 내용을 감싸는 div -->
+                <div id="login_form">
+                    <!-- 2_1. 입력을 받는 input 요소들이 위치할 form 영역 -->
+                    <form id="login_form_input" action="test.do" method="post">
+                        <!-- 3_1. 왼쪽 : 아이디와 비밀번호를 입력할 수 있는 text 영역 -->
+                        <div id="login_input_id_pwd">
+                            <input type="text" name="userId" placeholder="아이디를 입력하세요" required> <br>
+                            <input type="text" name="userPwd" placeholder="비밀번호를 입력하세요" required>
+                        </div>
+                        <!-- 3_2. 오른쪽 : 로그인 버튼이 위치할 button 영역 -->
+                        <div id="login_input_btn">
+                            <input type="submit" value="로그인">
+                        </div>
+                    </form>
+                    <!-- 2_2. 회원가입, ID/PWD 찾기 페이지 요청을 할 수 있는 div 영역 -->
+                    <div id="login_form_etc">
+                        <a href="">회원가입</a>
+                        <a href="">ID/PWD 찾기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div id="footer_1">
+                <a href="">이용약관</a> |
+                <a href="">개인정보취급방침</a> |
+                <a href="">인재채용</a> |
+                <a href="">고객센터</a>
+            </div>
+            <div id="footer_2">
+                <p id="p1">
+                    강남지원 1관 : 서울특별시 강남구 테헤란로14길 6 남도빌딩 2F, 3F, 4F, 5F, 6F <br>
+                    강남지원 2관 : 서울특별시 강남구 테헤란로10길 9 그랑프리 빌딩 4F, 5F, 7F <br>
+                    강남지원 3관 : 서울특별시 강남구 테헤란로 130 호산빌딩 5F, 6F <br>
+                    종로지원 : 서울특별시 중구 남대문로 120 대일빌딩 2F, 3F <br>
+                    당산지원 : 서울특별시 영등포구 선유동2로 57 이레빌딩 (구관) 19F, 20F
+                </p>
+                <p id="p2">
+                    Copyright © 1998-2022 KH Information Educational Institute All Right Reserved
+                </p> <!-- p는 블럭 요소라 영역 나누기 가능 -->
+            </div>
+        </div>
+        </div>
+    </div>
+    
+</body>
+</html>
