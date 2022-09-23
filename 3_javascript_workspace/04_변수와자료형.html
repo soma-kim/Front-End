@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수와 자료형</title>
+</head>
+<body>
+    <h1>변수와 자료형</h1>
+
+    <h3>* 변수 선언 시 var 뿐만 아니라 let, const도 사용 가능</h3>
+
+    <h4>var, let, const의 차이점</h4>
+
+    <h4>1)변수 선언 방식</h4>
+    
+    <button onclick="diffDeclare();">클릭</button>
+
+    <script>
+        function diffDeclare() {
+            
+            // var 변수명;
+            // let 변수명;
+            // const 변수명 = 값;
+
+            // var: 변수의 중복 선언 가능, 재할당 가능
+            var userId = "user01";
+            console.log(userId);
+
+            var userId = "user02"; // 변수의 중복 선언이 가능
+            console.log(userId);
+
+            userId = "user03"; // 대입(할당) 가능
+            console.log(userId);
+            
+            console.log("----------");
+
+            // let: 변수의 중복 선언 불가능, 재할당 가능
+            let userPwd = "pass01";
+            console.log(userPwd);
+
+            // let userPwd = "pass02"; // 변수의 중복선언이 애초에 불가함 (자바의 변수와 같음)
+            // console.log(userPwd);
+
+            userPwd = "pass03";
+            console.log(userPwd);
+
+            console.log("----------");
+
+            // const: 변수의 중복 선언 불가능, 재할당 불가능
+            const age = 20
+            console.log(age);
+
+            // const age = 30; // 중복 선언이 애초에 안 됨 (자바의 변수와 동일)
+            // console.log(age);
+
+            age = 40; // 재대입(재할당) 불가 (값 변경이 불가하다 == 상수)
+            console.log(age);
+
+            /*
+                var는 자유롭게 변수를 선언, 사용할 수 있다라는 장점이 있음
+                단, 중복된 변수가 남발할 수 있고 실수로 인해 해당 변수에 내가 원하지 않는 값으로 덮어씌워질 수 있음
+                => 보완돼서 나온 개념이 let, const
+
+                let, const 사용을 권장 (회사 내규에 따르나 고루 쓸 줄 알아야 함)
+            */
+        }
+    </script>
+
+    <hr>
+
+    <h4>2) 스코프(변수 사용 가능 영역)</h4>
+
+    <button onclick="diffScope();">클릭</button>
+
+    <script>
+        function diffScope() {
+
+            // var : functional scope => 변수가 선언된 "함수 영역" 안에서는 사용 가능
+            if(true) {
+                var age = 20;
+            }
+            console.log(age); // if문에서 선언한 변수를 if문 바깥에서도 쓸 수 있다
+
+            for(var i = 0; i < 10; i++) {
+                console.log(i);
+            }
+            console.log("반복문 끝남: " + i); // 10
+
+            // let, const: block scope => 변수가 선언된 "블록 영역" 안에서만 사용 가능
+            if(true) {
+                let name = "홍길동";
+                console.log(name);
+            }
+            console.log(name);
+
+            for(let j = 0; j < 5; j++) { // const는 for문에서 원래 사용 불가! (증감식 때문)
+                console.log(j);
+            }
+            console.log("반복문 끝남: " + j);
+
+        }
+    </script>
+
+    <hr>
+
+    <h3>* 변수 선언 위치에 따른 전역변수/지역변수</h3>
+
+    <pre>
+        &lt;script&gt;
+            var 변수명; // 전역변수 (global)
+            변수명; // 전역변수(global)
+
+            function 함수명() {
+
+                var 변수명; // 지역변수(local)
+                변수명; // 지역변수가 아니다???
+
+            }
+
+        &lt;/script&gt;
+    </pre>
+
+    <script>
+
+        // 전역변수들은 자동으로 window 객체의 필드로 등록됨
+        str = "전역변수";
+        var str2 = "var 전역변수";
+
+        // 화면이 실행되자마자 함수가 실행되게끔 하고 싶음
+        // 해당 이 html 문서가 브라우저상에 한 번 다 로딩되고 나서
+        // 곧 바로 해당 함수가 한번 실행됨
+        // window.onload : 해당 이 html 문서가 다 로딩되고 나서 곧 바로 실행할 함수를 지정하는 구문
+        window.onload = function () {
+            var str = "지역변수"; // 전역변수명과 중복
+            var str3 = "새로운 지역변수";
+            str4 = "난 뭘까요?";
+
+            console.log("--- str ---");
+            console.log(str); // 지역변수
+                              // 지역변수명과 전역변수명이 동일한 경우 변수 호출 시 지역변수 호출
+            // 전역변수에 접근하고자 할 경우에는? => window. 또는 this. 를 앞에 붙여 줌
+            console.log(window.str); // 전역변수
+            console.log(this.str); // 전역변수
+
+            console.log("--- str2 ---");
+            console.log(str2); // 전역변수
+            console.log(window.str2);
+            console.log(this.str2);
+
+            console.log("--- str3 ---");
+            console.log(str3); // 새로운 지역변수
+            console.log(window.str3); // undefined (정의되어 있지 않음)
+            console.log(this.str3); // undefined
+
+            console.log("--- str4 ---");
+            console.log(str4);
+            console.log(window.str4); // 난 뭘까요? 가 잘 찍힘! 즉, 전역변수!
+            console.log(this.str4);
+            // 지역변수라면 undefined 찍혔을 것
+            // 지역변수 선언 시 var를 생략할 경우 전역변수로 취급됨
+        }
+
+        function test() {
+            console.log("전역변수들 출력");
+            console.log(str);
+            console.log(str2);
+            console.log(str4);
+        }
+    </script>
+
+    <button onclick="test();">클릭</button>
+
+    <hr>
+
+    <h3>* 자료형</h3>
+
+    <p>
+        자바스크립트에서는 변수 선언 시 자료형을 별도로 지정하지 않음
+        (단, 자료형의 개념이 없는 건 아님) <br>
+        => 변수에 대입되는 값 (리터럴) 
+    </p>
+
+    <h4>자바스크립트의 자료형</h4>
+
+    <ul>
+        <li>String (문자열)</li>
+        <li>number (숫자)</li>
+        <li>boolean (논리값)</li>
+        <li>object (객체)</li>
+        <li>function (함수)</li>
+        <li>undefined (초기화가 안 된 변수)</li>
+    </ul>
+
+    <button onclick="typeTest();">자료형 테스트</button>
+    <div id="area" style="border : 1px solid black;"></div>
+
+    <script>
+        function typeTest() {
+            // var name = '홍길동'; // 쌍따옴표, 홑따옴표 상관없음
+            var name = "홍길동";
+            var age = 20;
+            var flag = true;
+
+            var hobby = ["영화", "음악", "낮잠"]; // 배열도 object type으로 취급됨
+            var user = {
+                name : "김말똥",
+                age : 30,
+                id : "user01"
+            }; // 객체
+
+            var testFn = function() {
+                alert("ㅋㅋㅋㅋ");
+            };
+
+            var noVal;
+
+            console.log(name);
+            console.log(age);
+            console.log(flag);
+            console.log(hobby);
+            console.log(user);
+            console.log(noVal);
+
+            var divEl = document.getElementById("area"); // "요소 객체" => object 타입
+
+            // 자바스크립트에서 자료형 확인 시 사용되는 함수: typeof(변수명)
+            divEl.innerHTML = name + "의 자료형: " + typeof(name) + "<br>";
+            divEl.innerHTML += age + "의 자료형: " + typeof(age) + "<br>";
+            divEl.innerHTML += flag + "의 자료형: " + typeof(flag) + "<br>";
+            divEl.innerHTML += hobby + "의 자료형: " + typeof(hobby) + "<br>";
+            // 배열도 object 타입임
+            // 배열의 내용물들이 하나의 문자열로 연이어져서 출력됨
+            divEl.innerHTML += user + "의 자료형: " + typeof(user) + "<br>";
+            // 객체도 object 타입임
+            // 출력 시 객체의 내용물들이 보이지 않고 단순히 [object Object]라고 출력됨
+            divEl.innerHTML += testFn + "의 자료형: " + typeof(testFn) + "<br>";
+            // 함수의 경우 정의 내용이 화면에 다 출력됨
+            divEl.innterHTML += noVal + "의 자료형: " + typeof(noVal) + "<br>";
+
+            // 객체 내부의 속성에 접근하려면? => .으로 접근
+            divEl.innerHTML += "<hr>";
+            divEl.innerHTML += user.name + "의 나이는 " + user.age
+                            + "살이며 아이디는 " + user.id + "입니다.";
+        }
+    </script>
+
+</body>
+</html>
