@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기본 선택자</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> <!-- 온라인 방식 -->
+</head>
+<body>
+
+    <h1>기본선택자</h1>
+
+    <h3>*아이디 선택자</h3>
+
+    <p>
+        특정 고유한 아이디값을 가진 요소 하나만을 선택하고자 할 때
+    </p>
+
+    <h1 id="id1">ID1</h1>
+    <h1 id="id2">ID2</h1>
+
+    <script>
+        $(document).ready(function() {
+
+            // 순수 자바스크립트 방식 => document.getElementById("아이디명");
+            // 선택된 요소 객체의 속성에 직접 접근해서 값을 변경(대입을 통해)
+            document.getElementById("id1").style.color = "red";
+            document.getElementById("id1").innerHTML = "h1 변경함";
+
+            // jQuery 방식 => $("#아이디명")
+            // 선택된 요소 객체에 메소드를 이용해서 값을 변경 (호출을 통해)
+            $("#id2").css("color", "pink");
+            $("#id2").html("h1 변경함");
+            // .css(): 요소 객체에 스타일과 관련된 기능을 수행
+            // .html(): 선택된 요소의 innerHTML과 관련된 기능들을 수행하는 메소드
+        });
+    </script>
+
+    <hr>
+
+    <h3>*태그 선택자</h3>
+
+    <p>
+        특정 태그 종류인 요소들을 모두 선택하고자 할 때
+    </p>
+
+    <p>JAVA</p>
+    <p>ORACLE</p>
+    <p>JDBC</p>
+
+    <h5>HTML</h5>
+    <h5>CSS</h5>
+    <h5>JAVASCRIPT</h5>
+
+    <script>
+        jQuery(document).ready(function() {
+
+            // 순수 자바스크립트 방식 => document.getElementsByTagName("태그명");
+            var p = document.getElementsByTagName("p"); // [p, p, p]
+            // p.style.color = "yellow"; // p는 배열이나 style 속성이 바로 적용 안 됨
+            // 반복문을 돌려 줘야 함
+            for(var i = 0; i < p.length; i++) {
+                p[i].style.color = "red";
+            }
+
+            // jQuery 방식 => $("태그명")
+            $("h5").css("color", "blue");
+            // 해당 구문이 .ready 바깥에 기술된다면 스타일이 적용되지 않음!
+            // ready 속성 자체가 태그들보다 위에 기술되는 건 상관없음 : 어차피 로드 후 적용되니까
+
+            // 한꺼번에 여러 종류의 태그들을 동시에 선택하고자 한다면
+            $("p, h5, #id1").css("backgroundColor", "pink");
+        });
+    </script>
+
+    <hr>
+
+    <h3>*클래스 선택자</h3>
+
+    <p>
+        특정한 클래스 속성을 가진 요소들을 선택하고자 할 때
+    </p>
+
+    <!-- h1[class=item]{class$}*3 + Enter -->
+    <h1 class="item">class1</h1>
+    <h1 class="item select">class2</h1>
+    <h1 class="item select">class3</h1>
+
+    <script>
+        $(document).ready(function() {
+
+            // 순수 자바스크립트 방식 => document.getElementsByClassName("클래스명");
+            var items = document.getElementsByClassName("item"); // [h1, h1, h1]
+            for(var i = 0; i < items.length; i++) {
+                items[i].style.color = "orange";
+                items[i].onclick = function() {
+                    console.log("클릭됨");
+                };
+            }
+
+            // jQuery 방식 => $(".클래스명")
+            $(".select").css("backgroundColor", "lightgrey");
+            $(".select").click(function() {
+                alert("클릭됨");
+            });
+
+            // .click() : 클릭 이벤트와 관련된 기능을 수행하는 메소드
+
+        });
+    </script>
+
+    <!--
+        *요소를 선택하는 방법
+        순수 자바스크립트 방식: document 객체의 요소를 선택해 주는 함수를 호출해서 불러옴
+        jQuery 방식: $(선택자)
+
+                     순수 자바 스크립트 방식                |       	jQuery 방식
+        ================================================================================
+            document.getElementById("아이디명")            |        $("#아이디명")
+            document.getElementsByTagName("태그명")        |        $("태그명")
+            document.getElementsByClassName("클래스명")    |	    $(".클래스명")
+
+            
+    *선택된 요소에 속성값을 변경하고자 할 때
+    순수 자바스크립트 방식: 선택된 요소 객체의 속성에 직접 접근해서 대입하는 방식
+    jQuery 방식: 해당 속성과 관련된 기능을 제공하는 메소드를 호출하는 방식
+
+                     순수 자바 스크립트 방식                        |       	jQuery 방식
+        ========================================================================================
+           스타일 관련    | 선택된 요소 객체의 속성에 접근해서        | 선택된 요소에 메소드를 호출
+                           .style.스타일속성명 = "변경할값";        | .css("스타일속성명", "변경할값");
+           내용 관련      | innerHTML = "변경할값";                 | .html("변경할값");
+           이벤트 관련    |	.on이벤트명 = function() {};            | .이벤트명(function() {});
+
+    -->
+    
+</body>
+</html>
